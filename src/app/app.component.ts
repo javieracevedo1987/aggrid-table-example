@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AgGridColumn } from 'ag-grid-angular';
 import { EditableFieldComponent } from './editable-field.component';
+import { GridApi } from 'ag-grid-community';
 
 @Component({
   selector: 'my-app',
@@ -8,7 +9,7 @@ import { EditableFieldComponent } from './editable-field.component';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-  name = 'Angular';
+  private gridApi: GridApi;
 
   columnDefs:  Partial<AgGridColumn>[] = [
     {
@@ -71,5 +72,14 @@ export class AppComponent  {
     { make: 'Ford', model: 'Mondeo', price: 32000 },
     { make: 'Porsche', model: 'Boxter', price: 72000 }
   ];
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+  }
+
+  onRemoveSelected(event: Event) {
+    const selectedRows = this.gridApi.getSelectedRows();
+    this.gridApi.updateRowData({ remove: selectedRows });
+  }
 
 }
