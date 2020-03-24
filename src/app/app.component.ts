@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AgGridColumn } from 'ag-grid-angular';
 import { EditableFieldComponent } from './editable-field.component';
 import { GridApi } from 'ag-grid-community';
+import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
   selector: 'my-app',
@@ -9,8 +10,8 @@ import { GridApi } from 'ag-grid-community';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
+  @ViewChild('agGrid',{static:false}) agGrid: AgGridAngular;
   private gridApi: GridApi;
-
   columnDefs:  Partial<AgGridColumn>[] = [
     {
       headerName: '',
